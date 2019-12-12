@@ -48,10 +48,25 @@ function update(changes,id) {
     })
 }
 
+// function remove(id) {
+//   return db("schemes")
+//     .where('id',id)
+//     .del();
+// }
+
 function remove(id) {
-  return db("schemes")
-    .where('id',id)
-    .del();
+  return findById(id)
+    .then(scheme=>{
+      if(scheme) {
+        return db("schemes")
+          .where('id',id)
+          .del()
+          .then(()=>scheme);
+      }
+      else {
+        return null;
+      }
+    })  
 }
 
 
