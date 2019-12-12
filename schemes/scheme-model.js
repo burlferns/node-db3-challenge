@@ -6,7 +6,8 @@ module.exports = {
   findSteps,
   add,
   update,
-  remove
+  remove,
+  addStep
 };
 
 function find() {
@@ -67,6 +68,21 @@ function remove(id) {
         return null;
       }
     })  
+}
+
+// ******************************************
+// Stretch problem
+// ******************************************
+function addStep(step, scheme_id) {
+  return db("steps")
+    .insert(step, "id")
+    .then(ids=>{
+      // console.log("In addStep function of model & ids is:",ids);
+      return db.select("id","scheme_id","step_number","instructions")
+        .from("steps")
+        .where("id", "=", ids[0])
+        .first();
+    })
 }
 
 

@@ -33,3 +33,25 @@ JOIN [Customer] as cu
     ON o.CustomerId = cu.Id
 JOIN [Employee] as e
     ON o.EmployeeId = e.Id; 
+
+----------------------------------------------------------------------------    
+-- Stretch problems::
+-- internet site:    https://www.w3schools.com/Sql/tryit.asp?filename=trysql_select_top
+
+-- Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 9 records.
+SELECT c.CategoryName
+	, COUNT(*) AS "No of products"
+FROM [Products] AS p
+JOIN [Categories] AS c
+	ON p.CategoryID = c.CategoryID
+GROUP BY c.CategoryName;
+
+-- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records.
+SELECT od.OrderID
+	, COUNT(*) AS "ItemCount"
+FROM [OrderDetails] AS od
+GROUP BY od.OrderID
+ORDER BY od.OrderID;
+
+
+
